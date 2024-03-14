@@ -15,6 +15,15 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QSizePolicy,
 from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel,
     QPushButton, QSpinBox, QVBoxLayout, QTableWidget, QTableWidgetItem, QLCDNumber)
 
+colours = {
+	0: "blue",
+	1: "cyan",
+	2: "#0f0",
+	3: "orange",
+	4: "red",
+	5: "magenta",
+	229: "#229"
+}
 
 class Ui_MainWindow(object):
     # Width and height of window. Window can be scaled, but this values are default.
@@ -94,15 +103,6 @@ class Ui_MainWindow(object):
 
         # event handler
         self.tableWidget.itemSelectionChanged.connect(self.handleSelectionChanged)
-
-        # graph
-        #self.graph = FigureCanvas(Figure(figsize=(5, 3))) # graph
-        #self.graph.setObjectName(u"graph")
-        # graph nav menu
-        #self.graph_nav_menu = NavigationToolbar(self.graph, self.centralwidget)
-        #self.graph_nav_menu.setObjectName(u"graph_nav_menu")
-        #self.graphLayout.addWidget(self.graph_nav_menu)
-        #self.graphLayout.addWidget(self.graph)
         pass
 
     def __populateVLayout(self):
@@ -147,22 +147,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", self.window_name, None))
     # retranslateUi
-
-    # def fileButtonClicked(self, receiverFunction):
-    #     self.fileButton.clicked.connect(receiverFunction)
-    #     pass
-
-    # def displayFilePath(self, filepath):
-    #     self.filelabel.setText(u"📃Plik:\n  " + filepath + u"\n")
-    #     pass
-    
-    # # the element that allows to choose quantity is called spinner, thus name
-    # def neighbourSpinChanged(self, receiverFunction):
-    #     self.neighbourSpin.valueChanged.connect(receiverFunction)
-    #     #self.neighbourSpin.valueChanged.connect(catchNeighbourSpinChangedExample)
-    #     pass
-# def catchNeighbourSpinChangedExample(value):
-#     print(f"Neighbour spin value is: {value}")
 
 def extractIndex(modelIdx: QModelIndex) -> tuple[int, int]:
     """.selectedIndexes() returns QModelIndex object. this function extracts column and row number from it."""
