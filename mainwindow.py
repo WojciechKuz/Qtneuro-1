@@ -6,8 +6,6 @@ from ui_form import Ui_MainWindow #, metrics, votes
 # PySide6 (Qt), numpy, matplotlib
 
 # my imports:
-from fileloader import *
-import graphmanager as gr
 import uimanager as uim
 
 # this script can be used as program's entry point
@@ -22,21 +20,11 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # self.ui.graph is reference to graph canvas
-        #self.graphM = gr.GraphManager(self.ui.graph) # initialize GraphManager
-        self.uiManager = uim.UIManager(self.ui)#, self.graphM
-        #self.ui.fileButtonClicked(self.getFile)
-    
-    # reads file, prints file name in window, normalizes data, and passes it to UI manager
-    # def getFile(self): # self or self.ui
-    #     filename = selectFile(self)
-    #     self.ui.displayFilePath(filename)
-    #     points = normalize(readFile(filename))
-    #     self.uiManager.getPoints(points)
-    #     pass
+        self.uiManager = uim.UIManager(self.ui)
+        pass
 
 def checklibs():
-    pkgs = ['PySide6', 'numpy'] #'matplotlib', 
+    pkgs = ['PySide6', 'numpy']
     ihaveall = True
     for p in pkgs:
         try:
