@@ -22,6 +22,10 @@ colours = {
 	229: "#229"
 }
 
+# TODO detect digit button
+# TODO maybe auto digit detection selectionBox?
+# TODO read digit button that writes UIManager.grid to text field with possibility to copy it.
+
 class Ui_MainWindow(object):
     # Width and height of window. Window can be scaled, but this values are default.
     window_w = 640
