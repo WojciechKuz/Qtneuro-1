@@ -5,15 +5,12 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt, QModelIndex)
-from PySide6.QtGui import (
-    QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QSizePolicy,
     QStatusBar, QWidget)
 from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel,
     QPushButton, QSpinBox, QVBoxLayout, QTableWidget, QTableWidgetItem, QLCDNumber)
+
+from mytableview import MyTableView
 
 colours = {
 	0: "blue",
@@ -85,7 +82,7 @@ class Ui_MainWindow(object):
     def __populateTableLayout(self):
         
         # add graph layout to h layout
-        self.tableWidget = QTableWidget()
+        self.tableWidget = MyTableView()
         self.tableWidget.setObjectName(u"tableLayout")
         self.tableLayout.addWidget(self.tableWidget, stretch=6)
 
@@ -96,13 +93,20 @@ class Ui_MainWindow(object):
             self.tableWidget.setColumnWidth(i, self.table_colSize)
         for i in range(self.table_rows):
             self.tableWidget.setRowHeight(i, self.table_rowSize)
+        for x in range(self.tableWidget.columnCount()):
+            for y in range(self.tableWidget.rowCount()):
+                self.tableWidget.setItem(y, x, QTableWidgetItem(""))
 
         # Hide row and column headers
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
+        pass
 
-        # event handler
-        self.tableWidget.itemSelectionChanged.connect(self.handleSelectionChanged)
+    def connectHandleSelectionChanged(self, recieverFun):
+        self.tableWidget.itemSelectionChanged.connect(recieverFun)
+        pass
+    def setMouseReleaseReciever(self, recieverFun):
+        self.tableWidget.setMyMouseReleaseReciever(recieverFun)
         pass
 
     def __populateVLayout(self):
@@ -134,20 +138,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.resizeText)
         pass
 
-    def changeCellColor(self, row, col, color):
-        self.tableWidget.item(row, col).setBackground(QColor(color))
-
-    # TODO if something is selected, change it's state black/white cell. If selected nothing, don't change anything.
-
-    def handleSelectionChanged(self):
-        """Handle the itemSelectionChanged signal."""
-        selected_items = [extractIndex(x) for x in self.tableWidget.selectedIndexes()]
-        print("Selected items:", selected_items)
-
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", self.window_name, None))
     # retranslateUi
-
-def extractIndex(modelIdx: QModelIndex) -> tuple[int, int]:
-    """.selectedIndexes() returns QModelIndex object. this function extracts column and row number from it."""
-    return (modelIdx.column(), modelIdx.row())
