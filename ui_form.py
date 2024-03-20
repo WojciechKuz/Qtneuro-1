@@ -7,7 +7,7 @@ from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QSize, QTime, QUrl, Qt, QModelIndex)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QSizePolicy,
     QStatusBar, QWidget)
-from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel,
+from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel, QCheckBox,
     QPushButton, QSpinBox, QVBoxLayout, QTableWidget, QTableWidgetItem, QLCDNumber)
 
 from mytableview import MyTableView
@@ -21,10 +21,6 @@ colours = {
 	5: "magenta",
 	229: "#229"
 }
-
-# TODO detect digit button
-# TODO maybe auto digit detection selectionBox?
-# TODO read digit button that writes UIManager.grid to text field with possibility to copy it.
 
 class Ui_MainWindow(object):
     # Width and height of window. Window can be scaled, but this values are default.
@@ -130,16 +126,51 @@ class Ui_MainWindow(object):
         self.lcdLabel.setSizePolicy(labelPolicy)
         self.verticalLayout.addWidget(self.lcdLabel)
 
+        # detect digit button
+        self.detectButt = QPushButton()
+        self.detectButt.setObjectName(u"detectButton")
+        self.detectButt.setText(u"wykryj cyfrę") # &a means a is used as shortcut key
+        self.detectButt.setShortcut("d")
+        #self.detectButt.setSizePolicy(labelPolicy)
+        self.verticalLayout.addWidget(self.detectButt)
+
+        # auto detect selection box (default true)
+        self.detectCheckbox = QCheckBox(self.centralwidget)
+        self.detectCheckbox.setObjectName(u"detectCheckbox")
+        self.detectCheckbox.setText(u"&Automatyczne wykrywanie cyfr")
+        self.detectCheckbox.setChecked(True)
+        #self.detectCheckbox.setSizePolicy(labelPolicy)
+        self.verticalLayout.addWidget(self.detectCheckbox)
+
+        # copy digit text field
+        self.digitText = QLabel(self.centralwidget)
+        self.digitText.setObjectName(u"resizeText")
+        self.digitText.setText(u"\nTu będzie cyfra do skopiowania\n")
+        self.digitText.setSizePolicy(labelPolicy)
+        self.digitText.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        self.verticalLayout.addWidget(self.digitText)
+
+        # clean grid button
+        self.cleanButt = QPushButton()
+        self.cleanButt.setObjectName(u"cleanButton")
+        self.cleanButt.setText(u"wy&czyść pole") # &a means a is used as shortcut key
+        #self.detectCheckbox.setSizePolicy(labelPolicy)
+        self.verticalLayout.addWidget(self.cleanButt)
+
         # widget for spacing
         self.spaceWidget = QWidget(self.centralwidget)
         self.spaceWidget.setObjectName(u"spaceWidget")
         self.verticalLayout.addWidget(self.spaceWidget)
 
-        self.resizeText = QLabel(self.centralwidget)
-        self.resizeText.setObjectName(u"resizeText")
-        self.resizeText.setText(u"\nOkno można przeskalowywać")
-        self.resizeText.setSizePolicy(labelPolicy)
-        self.verticalLayout.addWidget(self.resizeText)
+        # hint text
+        hint1 = u"ℹ\nAby zobaczyć, co znajduje się pod\nzaznaczonym opszarem,\nodkliknij poza tabelą."
+        hint2 = u"ℹ\nOkno można przeskalowywać"
+
+        self.hintText = QLabel(self.centralwidget)
+        self.hintText.setObjectName(u"resizeText")
+        self.hintText.setText(hint1 + '\n' + hint2)
+        self.hintText.setSizePolicy(labelPolicy)
+        self.verticalLayout.addWidget(self.hintText)
         pass
 
     def retranslateUi(self, MainWindow):
