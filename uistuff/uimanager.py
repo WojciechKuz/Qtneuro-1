@@ -1,4 +1,4 @@
-from ui_form import Ui_MainWindow
+from uistuff.ui_form import Ui_MainWindow
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,

@@ -10,7 +10,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QSizePolicy,
 from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel, QCheckBox,
     QPushButton, QSpinBox, QVBoxLayout, QTableWidget, QTableWidgetItem, QLCDNumber)
 
-from mytableview import MyTableView
+from uistuff.mytableview import MyTableView
 
 colours = {
 	0: "blue",

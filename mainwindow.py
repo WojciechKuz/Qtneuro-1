@@ -1,12 +1,12 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
-from ui_form import Ui_MainWindow #, metrics, votes
+from uistuff.ui_form import Ui_MainWindow #, metrics, votes
 
 # czy profesor ma wszystkie potrzebne pakiety?
 # PySide6 (Qt), numpy, matplotlib
 
 # my imports:
-import uimanager as uim
+import uistuff.uimanager as uim
 
 # this script can be used as program's entry point
 

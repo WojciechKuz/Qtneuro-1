@@ -1,6 +1,7 @@
-from neuronbase import NeuronBase
+from nnstuff.neuronbase import NeuronBase
 
 class Perceptron(NeuronBase):
+	"""Represents single neuron"""
 	__theta: float
 	def __init__(self, weights: list[float], theta: float, biasWeight: float = 0.0):
 		""" Construct perceptron object.
