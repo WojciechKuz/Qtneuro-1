@@ -22,3 +22,6 @@ class NeuronBase:
 		for i in range(1, len(x)):
 			inSum = inSum + (x[i - 1] * self._weights[i])
 		return inSum
+	
+if __name__ == "__main__":
+    print('Run mainwindow.py or neuron-start.py to start program')

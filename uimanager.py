@@ -73,6 +73,7 @@ class UIManager:
             for y in range(7):
                 self.ui.tableWidget.item(y, x).setBackground(QColor("white"))
         self.grid = [0, 0, 0, 0, 0, 0, 0]
+        self.printGrid()
         #print("I have clean butt.")
         if self.ui.detectCheckbox.isChecked():
             self.detectDigit()
@@ -114,8 +115,18 @@ class UIManager:
 
     # TODO setDigitsOnLCD()
     def setDigitsOnLCD(self, digits: list[int]):
+        if len(digits) == 0:
+            self.ui.lcdNumber.display('.')
+            pass
+        digs: str = ""
+        for x in digits:
+            digs += str(x)
+        self.ui.lcdNumber.display(digs)
         pass
 
 def extractIndex(modelIdx: QModelIndex) -> tuple[int, int]:
     """.selectedIndexes() returns QModelIndex object. this function extracts column and row number from it."""
     return (modelIdx.column(), modelIdx.row())
+
+if __name__ == "__main__":
+    print('Run mainwindow.py or neuron-start.py to start program')

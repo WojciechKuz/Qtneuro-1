@@ -17,3 +17,6 @@ class Perceptron(NeuronBase):
 	def perceptron(self, x: list[float]) -> bool:
 		"""Do what perceptron does. multiply input by weights, and return if it's greater or equal to theta"""
 		return self.multiplyInput(x) >= self.__theta
+
+if __name__ == "__main__":
+    print('Run mainwindow.py or neuron-start.py to start program')

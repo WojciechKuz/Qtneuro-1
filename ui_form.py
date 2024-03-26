@@ -122,7 +122,7 @@ class Ui_MainWindow(object):
         # lcd label
         self.lcdLabel = QLabel(self.centralwidget)
         self.lcdLabel.setObjectName(u"lcdLabel")
-        self.lcdLabel.setText(u"Tu wyświetli się wykryta cyfra ⬆\nJeśli nic nie wykryto, wyświetli kropkę")
+        self.lcdLabel.setText(u"Tu wyświetlą się wykryte cyfry ⬆\nJeśli nic nie wykryto, wyświetli kropkę")
         self.lcdLabel.setSizePolicy(labelPolicy)
         self.verticalLayout.addWidget(self.lcdLabel)
 
@@ -176,3 +176,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", self.window_name, None))
     # retranslateUi
+
+if __name__ == "__main__":
+    print('Run mainwindow.py or neuron-start.py to start program')
