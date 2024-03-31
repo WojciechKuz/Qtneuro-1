@@ -1,4 +1,7 @@
 from nnstuff.neuronbase import NeuronBase
+import random
+
+LEARN_CONST = 0.2
 
 class Perceptron(NeuronBase):
 	"""Represents single neuron"""
@@ -19,5 +22,32 @@ class Perceptron(NeuronBase):
 		"""Do what perceptron does. multiply input by weights, and return if it's greater or equal to theta"""
 		return self.multiplyInput(x) >= self.__theta
 
+	def SPLAsh(self, exInput: list[float], exAnswer: float):
+		"""Teach perceptron. parameters: teaching example input, and answer for example"""
+		o = self.multiplyInput(exInput)
+		err = exAnswer - o
+		if err == 0:
+			return
+		self.__weightUpdate(exInput, err)
+		pass
+
+	def __weightUpdate(self, e: list[float], err: float):
+		"""Update perceptron's weights using formula in SPLA alghoritm.\n
+		parameters: e - exInput, err - error"""
+		for i in range(len(e)):
+			self._weights[i+1] += LEARN_CONST * err * e[i]
+			pass
+		self.__theta -= LEARN_CONST * err
+		pass
+
 if __name__ == "__main__":
     print('Run mainwindow.py or neuron-start.py to start program')
+
+def randomPerceptron(inputSize: int, useBias: bool = False) -> Perceptron:
+	random.seed()
+	randBiasWeight = 0.0
+	if useBias:
+		randBiasWeight: float = random.random()/2.0 # random number in 0-0.5 range
+	randWeights: list[float] = [random.random()/2.0 for i in range(inputSize)]
+	randTheta: float = random.random() / 2.0
+	return Perceptron(randWeights, randTheta, randBiasWeight)
