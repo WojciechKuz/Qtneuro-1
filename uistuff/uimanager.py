@@ -9,6 +9,8 @@ from PySide6.QtGui import (
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 
+import netuse
+
 # manage ui signals, trigger actions for UI_MainWindow
 class UIManager:
     ui: Ui_MainWindow
@@ -24,11 +26,15 @@ class UIManager:
         self.ui.detectCheckbox.stateChanged.connect(self.handleCheckbox)
         self.ui.detectButt.pressed.connect(self.handleDetectButton)
         self.ui.cleanButt.pressed.connect(self.handleCleanButt)
+
+        netuse.setNet1()
+        netuse.trainNet1()
         pass
 
     # TODO detectDigit() Don't do it here, pass parameters to some neuralnet manager
     def detectDigit(self):
-        print(u"Wykrywanko 🔎...")
+        #print(u"Wykrywanko 🔎...")
+        netuse.useNet1(self.grid)
         pass
 
     # UI event handling

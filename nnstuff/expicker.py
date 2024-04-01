@@ -25,19 +25,16 @@ class ExPicker:
 				self.incorrect.append(ex)
 			else:
 				self.correct.append(ex)
-		pass
+		return self
 
 	def pickExample(self, chances: float) -> tuple[int, list[int]]:
-		incIter = len(self.incorrect)
-		cIter = len(self.correct)
+		incLen = len(self.incorrect)
+		cLen = len(self.correct)
 		ifCorrect: bool = random.random() >= 1. - chances
 		if ifCorrect:
-			# TODO pick example from self.correct
-			pass
+			return self.correct[random.randint(0, cLen-1)]
 		else:
-			# TODO pick example from self.incorrect
-			pass
-		pass
+			return self.incorrect[random.randint(0, incLen-1)]
 	pass
 
 
@@ -45,5 +42,5 @@ if __name__ == '__main__':
 	print('Run mainwindow.py or neuron-start.py to start program')
 	# TEST
 	ep = ExPicker([(1, 'elo1'), (2, 'elo2'), (2, 'elo2, 2'), (3, 'elo3')])
-	ep.pickExample(2, 'xd')
+	print(ep.pickExample(2, 'xd'))
 	pass

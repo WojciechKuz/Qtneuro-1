@@ -21,6 +21,9 @@ class Perceptron(NeuronBase):
 	def perceptron(self, x: list[float]) -> bool:
 		"""Do what perceptron does. multiply input by weights, and return if it's greater or equal to theta"""
 		return self.multiplyInput(x) >= self.__theta
+	
+	def probability(self, x):
+		return self.multiplyInput(x)
 
 	def SPLAsh(self, exInput: list[float], exAnswer: float):
 		"""Teach perceptron. parameters: teaching example input, and answer for example"""
