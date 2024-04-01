@@ -19,9 +19,15 @@ class NeuralNetwork1:
 		self.__net = [randomPerceptron(inputSize) for i in range(nofPerceptr)]
 		pass
 
-	def trainingSeason():
-		"""Train network. Provide array of examples."""
+	def trainingSeason(self, examples, iterations, chances):
+		"""Train network. Provide array of examples.
+		Teaches each perceptron 'iterations' number of times.
+		For teaching chooses random example. Parameter 'chances' should be in range 0 to 1,
+		this are chances for positive example (where perceptron should output true)."""
 		# teach & update with .SPLAsh(), check with .perceptron()
+
+		# problem: how many examples should be positive or negative for each neuron?
+		# TODO use ExPicker
 		pass
 
 if __name__ == '__main__':

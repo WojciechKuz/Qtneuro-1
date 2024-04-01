@@ -24,7 +24,7 @@ def collectionMap(mylist: list, fun) -> list:
     return collMap
 
 def loadExamples(filename: str = 'training.txt') -> list[tuple[int, list[int]]]:
-    # load it to tuple (answer, exInput)
+    """load it to tuple (answer, exInput)"""
     lines = __loadText(filename)
     digit = -1
     examples = []
