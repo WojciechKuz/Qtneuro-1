@@ -34,7 +34,8 @@ class UIManager:
     # TODO detectDigit() Don't do it here, pass parameters to some neuralnet manager
     def detectDigit(self):
         #print(u"Wykrywanko 🔎...")
-        netuse.useNet1(self.grid)
+        detected = netuse.useNet1(self.grid)
+        self.setDigitsOnLCD(detected)
         pass
 
     # UI event handling
