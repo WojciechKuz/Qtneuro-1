@@ -31,7 +31,6 @@ class UIManager:
         netuse.trainNet1()
         pass
 
-    # TODO detectDigit() Don't do it here, pass parameters to some neuralnet manager
     def detectDigit(self):
         #print(u"Wykrywanko 🔎...")
         self.setDigitsOnLCD([])
@@ -122,7 +121,6 @@ class UIManager:
     def printGrid(self):
         self.ui.digitText.setText("Zakodowana cyfra do skopiowania:\n" + self.__getGridAsString())
 
-    # TODO setDigitsOnLCD()
     def setDigitsOnLCD(self, digits: list[int]):
         if len(digits) == 0:
             self.ui.lcdNumber.display('.')

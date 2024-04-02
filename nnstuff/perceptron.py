@@ -1,7 +1,7 @@
 from nnstuff.neuronbase import NeuronBase
 import random
 
-LEARN_CONST = 0.2
+learn_const = 0.2 # writable
 
 class Perceptron(NeuronBase):
 	"""Represents single neuron"""
@@ -38,9 +38,9 @@ class Perceptron(NeuronBase):
 		"""Update perceptron's weights using formula in SPLA alghoritm.\n
 		parameters: e - exInput, err - error"""
 		for i in range(len(e)):
-			self._weights[i+1] += LEARN_CONST * err * e[i]
+			self._weights[i+1] += learn_const * err * e[i]
 			pass
-		self.__theta -= LEARN_CONST * err
+		self.__theta -= learn_const * err
 		pass
 
 if __name__ == "__main__":

@@ -14,9 +14,9 @@ class ExPicker:
 	__allExamples = []
 	def __init__(self, examples) -> None:
 		self.__allExamples = examples
+		random.seed()
 		pass
 	def pickDigit(self, digit: int):
-		random.seed()
 		# hope those list store only references
 		self.correct = []
 		self.incorrect = []
@@ -32,8 +32,10 @@ class ExPicker:
 		cLen = len(self.correct)
 		ifCorrect: bool = random.random() >= 1. - chances
 		if ifCorrect:
+			#print('good ', end='')
 			return self.correct[random.randint(0, cLen-1)]
 		else:
+			#print('bad  ', end='')
 			return self.incorrect[random.randint(0, incLen-1)]
 	pass
 
@@ -42,5 +44,8 @@ if __name__ == '__main__':
 	print('Run mainwindow.py or neuron-start.py to start program')
 	# TEST
 	ep = ExPicker([(1, 'elo1'), (2, 'elo2'), (2, 'elo2, 2'), (3, 'elo3')])
-	print(ep.pickExample(2, 'xd'))
+	ep.pickDigit(2)
+	for i in range(10):
+		print(ep.pickExample(0.5))
+		pass
 	pass
