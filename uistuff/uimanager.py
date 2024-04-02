@@ -34,6 +34,7 @@ class UIManager:
     # TODO detectDigit() Don't do it here, pass parameters to some neuralnet manager
     def detectDigit(self):
         #print(u"Wykrywanko 🔎...")
+        self.setDigitsOnLCD([])
         detected = netuse.useNet1(self.grid)
         self.setDigitsOnLCD(detected)
         pass
@@ -84,6 +85,7 @@ class UIManager:
         #print("I have clean butt.")
         if self.ui.detectCheckbox.isChecked():
             self.detectDigit()
+        self.ui.lcdNumber.display(".")
         pass
 
 
