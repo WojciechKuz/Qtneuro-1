@@ -1,7 +1,28 @@
-from nnstuff.perceptron import *
+from nnstuff.perceptron import Perceptron, randomPerceptron
+import nnstuff.perceptron
 from nnstuff.expicker import ExPicker
 from fileload import loadExamples, flatten, collectionMap
 
+VARIABLE_LEARN_CONST = False
+lc_max = 0.2
+lc_min = 0.01
+
+def linearLearnConst(i: int, i_max: int, printing: bool = False):
+	if not VARIABLE_LEARN_CONST:
+		return
+	if i % (i_max // 20) == 0 and printing:
+		print(nnstuff.learn_const)
+	dist = lc_max - lc_min
+	perStep = dist / i_max
+	lc = lc_max - perStep * i
+	if lc < lc_min:
+		print('Warning! learn_const > lc_max:', lc)
+	if lc > lc_max:
+		print('Warning! learn_const < lc_min:', lc)
+	if lc < 0:
+		print('Warning! learn_const < 0:', lc)
+	nnstuff.learn_const = lc
+	return lc
 
 # functions to convert representations of 'digit grid'. (7ints to 35 floats)
 def list7toList35(seven: list[int]) -> list[float]:
@@ -61,8 +82,9 @@ class NeuralNetwork1:
 		for d in range(len(self.__net)): # 10 digits
 			exPick.pickDigit(d)
 			for i in range(iterations): # iterations
+				linearLearnConst(i, iterations, d == 1)
 				ex = exPick.pickExample(chances)
-				self.__net[d].SPLAsh(convert(ex[1]), ex[0])
+				self.__net[d].SPLAsh(convert(ex[1]), ifDigMatch(ex[0], d))
 				pass
 			pass
 		pass
