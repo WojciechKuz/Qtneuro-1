@@ -13,7 +13,7 @@ class Perceptron(NeuronBase):
 		biasWeight (optional) - bias. to turn it off set it to 0
 		"""
 		# super init or sth
-		NeuronBase(self, weights, biasWeight)
+		super(Perceptron, self).__init__(weights, biasWeight)
 		self.__theta = theta
 		pass
 	#

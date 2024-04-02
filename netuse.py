@@ -26,4 +26,4 @@ def useNet1(input: list[int]) -> list[int]:
     print(u"Detecting 🔎...")
     return net1.detectDigit(input) # or .digitChances() (this skipps comparsion to theta)
 
- # TODO funkcja testująca. sprawdza, czy poprawnie rozpozna każdy przykład.
+ # TODO funkcja testująca. sprawdza, czy poprawnie rozpozna każdy przykład. I raporty z uczenia by się przydały.

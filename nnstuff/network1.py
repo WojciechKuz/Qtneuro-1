@@ -1,5 +1,5 @@
-from perceptron import *
-from expicker import ExPicker
+from nnstuff.perceptron import *
+from nnstuff.expicker import ExPicker
 from fileload import loadExamples, flatten, collectionMap
 
 
