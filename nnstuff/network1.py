@@ -7,12 +7,16 @@ from fileload import loadExamples, flatten, collectionMap
 def list7toList35(seven: list[int]) -> list[float]:
     """Convert list of 7 integers (where each contain 5 values stored as bits) to list of 35 floats containing 1. or 0."""
     return flatten([__numToByteList(n) for n in seven])
+
 def __numToByteList(n: int) -> list[float]:
     """In n there's saved 5 numbers (0s or 1s) as bits. Get list of them as floats."""
     row = []
-    access = 1
+    access: int = 1
     for i in range(5):
-        row.append(float((n & access)**0)) # n & access gives 0 or other_int. then exponent to 0 is 1 or 0. And finally to float
+        if (n & access) > 0: # n & access gives 0 or other integer. then integer to 1.0, 0 to 0.0
+            row.append(1.0) 
+        else:
+            row.append(0.0)
         access = access << 1
     return row
 
@@ -81,3 +85,13 @@ class NeuralNetwork1:
 if __name__ == '__main__':
 	print('Run mainwindow.py or neuron-start.py to start program')
 	pass
+
+# def NET1TEST():
+# 	# TEST
+# 	decoded = convert([31, 17, 17, 17, 17, 17, 31])
+# 	print('length of decoded:', len(decoded))
+# 	print(decoded)
+
+# def NET1TEST_BYTES():
+# 	for x in range(31+1):
+# 		print(f"{x}:", __numToByteList(x))
