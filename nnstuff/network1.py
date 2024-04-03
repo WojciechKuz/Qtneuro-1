@@ -1,11 +1,13 @@
 from nnstuff.perceptron import Perceptron, randomPerceptron
 import nnstuff.perceptron
-from nnstuff.expicker import ExPicker
+from nnstuff.expicker import ExPicker, randomFlip
 from fileload import loadExamples, flatten, collectionMap
 
 VARIABLE_LEARN_CONST = False
 lc_max = 0.2
 lc_min = 0.01
+
+random_flip = 0.05
 
 def linearLearnConst(i: int, i_max: int, printing: bool = False):
 	if not VARIABLE_LEARN_CONST:
@@ -52,7 +54,7 @@ def ifDigMatch(a, b) -> float:
         return -1.
 
 def convert(seven: list[int]) -> list[float]: # FIXME should I convert [0, 1] to [-1, 1] here??? Or convert only output???
-	return list7toList35(seven)
+	return randomFlip(list7toList35(seven), random_flip)
 
 class NeuralNetwork1:
 	__net: list[Perceptron] = []
@@ -88,6 +90,29 @@ class NeuralNetwork1:
 				pass
 			pass
 		pass
+
+	def trainingSeason2(self, examples, iterations, chances):
+		"""Same as NeuralNetwork1.trainingSeason(), but uses Pocket learning instead of simple learning."""
+		exPick = ExPicker(examples)
+		for d in range(len(self.__net)): # 10 digits
+			exPick.pickDigit(d)
+			for i in range(iterations): # iterations
+				linearLearnConst(i, iterations, d == 1)
+				ex = exPick.pickExample(chances)
+				self.__net[d].PLA(convert(ex[1]), ifDigMatch(ex[0], d))
+				pass
+			self.__net[d].endPLA()
+			pass
+		pass
+
+	algo = trainingSeason # U can set preffered algorithm - trainingSeason or trainingSeason2
+
+	def whichAlgo(self) -> str:
+		if self.algo == self.trainingSeason:
+			return 'SPLA'
+		if self.algo == self.trainingSeason2:
+			return 'PLA'
+		return 'unknown'
 
 	def detectDigit(self, input: list[int]) -> list[int]:
 		"""Detects digit, returns list of possible digits. Parameter 'input' is list of 7 ints (encoded grid)."""

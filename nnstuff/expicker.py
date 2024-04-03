@@ -5,6 +5,8 @@ import random
 # Layout of examples: list[tuple[int, list[int]]]
 # list of tuples:  (answer, example(list of 7 ints))
 
+random.seed()
+
 def returnWhenDigMatch(exTup: tuple, dig: int) -> (tuple | None):
     if exTup[0] == dig:
         return exTup
@@ -14,7 +16,7 @@ class ExPicker:
 	__allExamples = []
 	def __init__(self, examples) -> None:
 		self.__allExamples = examples
-		random.seed()
+		# seed
 		pass
 	def pickDigit(self, digit: int):
 		# hope those list store only references
@@ -38,6 +40,17 @@ class ExPicker:
 			#print('bad  ', end='')
 			return self.incorrect[random.randint(0, incLen-1)]
 	pass
+
+def flip(elem: float, chances):
+	if random.random() >= chances:
+		return (elem + 1) % 2
+	return elem # random < chances
+
+def randomFlip(array: list[float], chances: float):
+	"""Flip random elements in the list of floats. 0->1, 1->0"""
+	for i in range(len(array)):
+		array[i] = flip(array[i], chances)
+	return array
 
 
 if __name__ == '__main__':

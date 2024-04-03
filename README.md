@@ -7,11 +7,15 @@ Przed użyciem należy zainstalować dodatkowe biblioteki Pythona:
 ```
 python -m pip install PySide6
 ```
-Program uruchamia się wykonując neuron-start.py:
+Program GUI uruchamia się wykonując neuron-start.py:
 ```
 python neuron-start.py
 ```
 opcjonalnie po prostu ```./start.bat``` (nie wiem czy działa)
+
+Można także uruchomić netuse.py aby jedynie przetestować sieć na przykładach.
+
+Parametry można ustawiać w netuse.py.
 
 ⚠ Uwagi:
 

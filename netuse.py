@@ -15,18 +15,26 @@ net1 = NeuralNetwork1()
 examples = loadExamples()
 
 # HERE SET PARAMETERS
-nnstuff.perceptron.learn_const = 0.01    # Overwrite 'learn_const'. Default is 0.2.
+nnstuff.perceptron.learn_const = 0.05    # Overwrite 'learn_const'. Default is 0.2.
 nnstuff.network1.lc_max = 0.2
 nnstuff.network1.lc_min = 0.05
 neuron_count = 10
 input_count = 35
-learn_iterations = 8000          # learning iterations per neuron
+learn_iterations = 5000          # learning iterations per neuron
 positive_ex_chance = 0.1        # chances for example with correct answer 'true'
+nnstuff.network1.random_flip = 0.0 / 35 # chances for flipped state in input
 
 
 unique_elem_count = neuron_count
 NATURAL_CHANCE = 1 / neuron_count
 PRINT_ARR = False
+
+# TODO use & test PLA
+USE_POCKET = False
+
+if USE_POCKET:
+    net1.algo = net1.trainingSeason2
+
 
 # USAGE
 def setNet1():
@@ -34,6 +42,7 @@ def setNet1():
 
 def trainNet1():
     print(u"Training network 🎓\n For now no learning reports. Check out TODO in netuse.py")
+    print(f"Using {net1.whichAlgo()} learning algorithm.")
     net1.trainingSeason(examples, learn_iterations, positive_ex_chance)
     testNet1()
 
@@ -77,9 +86,11 @@ def testNet1():
     print(u"Testing network 🧪...")
     exSorted = sortExamples()
     print('Score 0-10:')
+    score_sum = 0.0
     for d in range(unique_elem_count):
-        testNet1For(d, exSorted)
+        score_sum += testNet1For(d, exSorted)
         pass
+    print(f"#AVG score:", score_sum / unique_elem_count)
     pass
 
 def testNet1For(d: int, exSorted):
@@ -95,13 +106,14 @@ def testNet1For(d: int, exSorted):
         count += len(out)
         outs += 1
         pass
-    if count == 0:
-        score = 0
-        count = 1
-    print(f"#{d} score:", (score * 1.0 / count * 10.0), 'avgOutLen:', (count / outs))
+    score_count = count
+    if score_count < outs:
+        score_count = outs
+    score10 = (score * 1.0 / score_count * 10.0)
+    print(f"#{d} score:", score10, 'avgOutLen:', (count / outs))
     if PRINT_ARR:
         print('arr:', result)
-    pass
+    return score10
 
 
 if __name__ == "__main__":
