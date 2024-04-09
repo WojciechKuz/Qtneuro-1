@@ -56,8 +56,8 @@ class Perceptron(NeuronBase):
 
 	def PLA(self, exInput: list[float], exAnswer: float):
 		"""Teach perceptron. parameters: teaching example input, and answer for example (1.0 or -1.0)."""
-		o = self.perceptron(exInput) # this piece of shit outputs boolean, implicitly converted to whatever in substraction. That's why soft type langs suck.
-		err = exAnswer - bool2float(o)
+		o = self.perceptron(exInput)
+		err = exAnswer - bool2float(o) # That's why soft typed langs suck. Without bool2float it implicitly converted types. 🐛
 		if isZero(err):
 			# error is zero
 			self.lifeTime += 1
