@@ -20,17 +20,17 @@ nnstuff.network1.lc_max = 0.2
 nnstuff.network1.lc_min = 0.05
 neuron_count = 10
 input_count = 35
-learn_iterations = 5000          # learning iterations per neuron
+learn_iterations = 8000          # learning iterations per neuron
 positive_ex_chance = 0.1        # chances for example with correct answer 'true'
-nnstuff.network1.random_flip = 0.0 / 35 # chances for flipped state in input
+nnstuff.network1.random_flip = 0.9 / 35 # chances for flipped state in input
 
 
 unique_elem_count = neuron_count
 NATURAL_CHANCE = 1 / neuron_count
 PRINT_ARR = False
 
-# TODO use & test PLA
-USE_POCKET = False
+# if pocket:
+USE_POCKET = True
 
 if USE_POCKET:
     net1.algo = net1.trainingSeason2
@@ -43,7 +43,7 @@ def setNet1():
 def trainNet1():
     print(u"Training network 🎓\n For now no learning reports. Check out TODO in netuse.py")
     print(f"Using {net1.whichAlgo()} learning algorithm.")
-    net1.trainingSeason(examples, learn_iterations, positive_ex_chance)
+    net1.algo(examples, learn_iterations, positive_ex_chance)
     testNet1()
 
 def useNet1(input: list[int]) -> list[int]:

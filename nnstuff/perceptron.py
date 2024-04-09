@@ -10,6 +10,12 @@ def isZero(x: float) -> bool:
 		return False
 	return True
 
+def bool2float(b: bool) -> float:
+	"""Takes bool, outputs 1 if true, outputs -1 if false."""
+	if b:
+		return 1.0
+	return -1.0
+
 class Perceptron(NeuronBase):
 	"""Represents single neuron"""
 	pocket: list[float] = []
@@ -36,27 +42,27 @@ class Perceptron(NeuronBase):
 		"""Do what perceptron does. multiply input by weights, and return if it's greater or equal to theta"""
 		return self.multiplyInput(x) >= self.__theta
 	
-	def probability(self, x):
+	def multiply(self, x):
 		return self.multiplyInput(x)
 
 	def SPLAsh(self, exInput: list[float], exAnswer: float):
 		"""Teach perceptron. parameters: teaching example input, and answer for example (1.0 or -1.0)"""
-		o = self.multiplyInput(exInput)
-		err = exAnswer - o
-		if err == 0:
+		o = self.perceptron(exInput) # was: multiplyInput, which was wrong.
+		err = exAnswer - bool2float(o)
+		if err == 0.0: # comparing floats like that is not good idea, but here we add/substract only 1.0, -1.0, 0.0. Use isZero() in case of more complex float
 			return
 		self.__weightUpdate(exInput, err)
 		pass
 
 	def PLA(self, exInput: list[float], exAnswer: float):
 		"""Teach perceptron. parameters: teaching example input, and answer for example (1.0 or -1.0)."""
-		o = self.multiplyInput(exInput)
-		err = exAnswer - o
+		o = self.perceptron(exInput) # this piece of shit outputs boolean, implicitly converted to whatever in substraction. That's why soft type langs suck.
+		err = exAnswer - bool2float(o)
 		if isZero(err):
 			# error is zero
 			self.lifeTime += 1
 			if self.lifeTime > self.pocketLife: # if lives longer update pocket
-				self.pocket = self._weights
+				self.pocket = list(self._weights)
 				self.pocketLife = self.lifeTime
 				pass
 			pass

@@ -37,11 +37,16 @@ def __numToByteList(n: int) -> list[float]:
     access: int = 1
     for i in range(5):
         if (n & access) > 0: # n & access gives 0 or other integer. then integer to 1.0, 0 to 0.0
-            row.append(1.0) 
+            row.append(1.0)
         else:
             row.append(0.0)
         access = access << 1
+    # 3 = 0b00011 -> [1,1,0,0,0] -> [0,0,0,1,1]
+    row.reverse()
     return row
+
+def letHimCook(n): # for testing
+	return __numToByteList(n)
 
 # helper functions
 def mapTo1m1(x):
@@ -126,7 +131,7 @@ class NeuralNetwork1:
 		"""returns list of posibilities for each of 10 digits."""
 		probabil = []
 		for perceptr in self.__net:
-			probabil.append(perceptr.probability(convert(input)))
+			probabil.append(perceptr.multiply(convert(input)))
 		return probabil
 
 if __name__ == '__main__':
